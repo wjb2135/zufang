@@ -29,7 +29,7 @@ export default function ({
   })
 
   $axios.onResponse(response => {
-    if (response.data.errcode != 0) {
+    if (response.data.errcode != undefined && response.data.errcode != 0) {
       if (response.data.errcode == 10006) { // 用户未登录或登录状态信息过期
         redirect({
           path: '/error_page',

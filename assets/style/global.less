@@ -2,9 +2,28 @@
 body {
   background-color: @background-color-base;
 }
-.main {
+
+body, p, ul {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: #ffffff;
+}
+.flexBlock {
+  display: flex;
+}
+.defaultWidth {
   width: 1200px;
   margin: 0 auto;
+}
+.el-button--success {
+  color: #FFF;
+  background-color: @greenBackgroundColor;
+  border-color: @greenBackgroundColor;
 }
 
 // iconfont

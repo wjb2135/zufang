@@ -8,7 +8,7 @@ body {
 }
 
 a {
-  color: #1D96E3;
+  color: #fff;
   text-decoration: none
 }
 
@@ -70,9 +70,9 @@ p {
   font-size: inherit
 }
 
-p {
+/* p {
   line-height: 1.8
-}
+} */
 
 sub,
 sup {

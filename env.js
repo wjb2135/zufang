@@ -4,7 +4,7 @@
 
 const ENV = {
   _APIROOT: "http://www.xiaochanquanshenzhen.com", // 服务端API接口地址
-  _PORT: 3000, // 系统运行端口号
+  _PORT: 3003, // 系统运行端口号
   _HEAD: {
     title: "深圳小产权房-东莞小产权房-小产权房买卖交易首选",
     description:

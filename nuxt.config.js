@@ -9,18 +9,12 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    title: ENV._HEAD.title,
     meta: [
       { charset: "utf-8" },
       {
         name: "viewport",
         content:
           "width=device-width, initial-scale=1, user-scalable=no, minimal-ui, maximum-scale=1.0, minimum-scale=1.0"
-      },
-      {
-        hid: "description",
-        name: "description",
-        content: ENV._HEAD.description
       }
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
@@ -37,7 +31,8 @@ module.exports = {
   css: [
     "element-ui/lib/theme-chalk/index.css",
     "~assets/style/reset.css",
-    "~assets/style/global.less"
+    "~assets/style/global.less",
+    "~assets/font/iconfont.css"
   ],
 
   /*
@@ -48,7 +43,7 @@ module.exports = {
   /*
    ** Nuxt.js modules
    */
-  modules: ["@nuxtjs/axios", "@nuxtjs/style-resources"],
+  modules: ["@nuxtjs/axios", "@nuxtjs/style-resources", "@nuxtjs/proxy"],
 
   styleResources: {
     less: "./assets/style/variable.less"
@@ -58,33 +53,34 @@ module.exports = {
    ** Build configuration
    */
   build: {
+    publicPath: process.env.NODE_ENV === 'development' ? '/_nuxt/' : 'front_end/.nuxt/dist/client/',
     transpile: [/^element-ui/],
     filenames: {
-      app: ({ isDev }) =>
-        isDev ? "[name].js" : "[chunkhash]." + ENV._VERSION + ".js",
-      chunk: ({ isDev }) =>
-        isDev ? "[name].js" : "[id].[chunkhash]." + ENV._VERSION + ".js"
+      app: ({ isDev }) => isDev ? '[name].js' : '[chunkhash].' + ENV._VERSION + '.js',
+      chunk: ({ isDev }) => isDev ? '[name].js' : '[chunkhash].' + ENV._VERSION + '.js',
+      css: ({ isDev }) => isDev ? '[name].js' : '[contenthash].' + ENV._VERSION + '.css',
+      img: ({ isDev }) => isDev ? '[path][name].[ext]' : '[hash:7].[ext]'
     },
 
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config, ctx) {},
+    extractCSS: true // 将主块中的 CSS 提取到一个单独的 CSS 文件中
   },
 
   axios: {
     proxy: true,
-    prefix: "/api/",
     credentials: true
     // See https://github.com/nuxt-community/axios-module#options
   },
 
   proxy: {
     "/api/": {
-      target: ENV._APIROOT, //这个网站是开源的可以请求到数据的
+      target: ENV._APIROOT, // 这个网站是开源的可以请求到数据的
+      changeOrigin: true,
       pathRewrite: {
-        "^/api/": "/",
-        changeOrigin: true
+        "^/api/": "/"
       }
     }
   },

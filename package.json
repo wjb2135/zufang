@@ -18,6 +18,8 @@
     "nuxt": "^2.4.0"
   },
   "devDependencies": {
+    "@nuxtjs/axios": "^5.11.0",
+    "@nuxtjs/proxy": "^2.0.0",
     "@nuxtjs/style-resources": "^1.0.0",
     "less": "^3.11.2",
     "less-loader": "^6.1.0",
